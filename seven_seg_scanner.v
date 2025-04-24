@@ -8,7 +8,7 @@ module seven_seg_scanner(
     wire L, LC, RC, R;
 
     dff Ldff(
-        .Default(1'b1),
+        .Default(1'b0),
         .D(Lnext),
         .clk(clk),
         .Q(L),
@@ -32,21 +32,25 @@ module seven_seg_scanner(
     );
     
     dff Rdff(
-        .Default(1'b0),
+        .Default(1'b1),
         .D(Rnext),
         .clk(clk),
         .Q(R),
         .reset(reset)
     );
+    assign RCnext = R;
+    assign LCnext = RC;
+    assign Lnext = LC;
+    assign Rnext = L;
     
-    assign Lnext = R;
-    assign LCnext = L;
-    assign RCnext = LC;
-    assign Rnext = RC;
+//    wire [3:0] nextS;
+//    assign nextS= {L,LC,RC,R};
     
-    assign anode[0] = ~L;
-    assign anode[1] = ~LC;
-    assign anode[2] = ~RC;
-    assign anode[3] = ~R;
+    //$display(" The current state %b",nextS); 
+    
+    assign anode[0] = ~R;
+    assign anode[1] = ~RC;
+    assign anode[2] = ~LC;
+    assign anode[3] = ~L;
 
 endmodule

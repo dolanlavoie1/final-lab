@@ -18,7 +18,7 @@ module ones_compliment(
     
     full_adder full_adder_1(
         .A(A[0]),
-        .B(~B[0]),
+        .B(B[0]),
         .Cin(1'b0),
         .Cout(carryVal1),
         .Y(out1)
@@ -26,7 +26,7 @@ module ones_compliment(
     
     full_adder full_adder_2(
         .A(A[1]),
-        .B(~B[1]),
+        .B(B[1]),
         .Cin(carryVal1),
         .Cout(carryVal2),
         .Y(out2)
@@ -34,7 +34,7 @@ module ones_compliment(
     
     full_adder full_adder_3(
         .A(A[2]),
-        .B(~B[2]),
+        .B(B[2]),
         .Cin(carryVal2),
         .Cout(carryVal3),
         .Y(out3)
@@ -42,7 +42,7 @@ module ones_compliment(
     
     full_adder full_adder_4(
         .A(A[3]),
-        .B(~B[3]),
+        .B(B[3]),
         .Cin(carryVal3),
         .Cout(carryVal4),
         .Y(out4)

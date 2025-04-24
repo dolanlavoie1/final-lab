@@ -7,7 +7,7 @@ module seven_seg_decoder(
     output reg [6:0] segs
 );
 
-    reg selected_sig;
+    reg [3:0] selected_sig;
     
     always @(*) begin
         case (anode)

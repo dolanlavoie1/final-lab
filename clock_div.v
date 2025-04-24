@@ -5,11 +5,11 @@ module clock_div
 (
     input clock,
     input reset,
-    output reg div_clock
+    output div_clock
 );
 
     wire [DIVIDE_BY:0] out, NotQ;
-    integer i;
+    genvar i;
     
     dff dff1(
             .Default(0),
@@ -20,9 +20,9 @@ module clock_div
             .NotQ(NotQ[0])
     );
     
-    initial begin
-        for (i = 1; i < DIVIDE_BY; i = i + 1) begin
-            dff dff(
+    generate
+        for (i = 1; i < DIVIDE_BY; i = i + 1) begin : dff_gen
+            dff dff2(
                 .Default(0),
                 .D(NotQ[i]),
                 .clk(out[i - 1]),
@@ -31,6 +31,8 @@ module clock_div
                 .NotQ(NotQ[i])
             );
         end
-    end
+    endgenerate
+    
+    assign div_clock = out[DIVIDE_BY - 1];
 
 endmodule

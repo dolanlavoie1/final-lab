@@ -12,10 +12,10 @@ module top
 );
 
     wire div_clock;
-    wire [3:0] AplusB, AminusB;
+    wire [3:0] AplusB, AminusB, anode;
 
     // Instantiate the clock divider...
-    clock_div clock_div(
+    clock_div #( .DIVIDE_BY(DIVIDE_BY))clock_div(
         .clock(clk),
         .reset(btnC),
         .div_clock(div_clock)
@@ -24,7 +24,7 @@ module top
     seven_seg_scanner seven_seg_scanner(
         .clk(div_clock),
         .reset(btnC),
-        .anode(an)
+        .anode(anode)
     );
     // ... wire the scanner to the decoder
     seven_seg_decoder seven_seg_decoder(
@@ -32,16 +32,17 @@ module top
         .B(sw[7:4]),
         .AplusB(AplusB),
         .AminusB(AminusB),
-        .anode(an),
+        .anode(anode),
         .segs(seg)
     );
     // Wire up the math block into the decoder
     math_block math_block(
         .A(sw[3:0]),
         .B(sw[7:4]),
-        .AplusB(AplusB),
+        .AplusB(AplusB),  //AplusB
         .AminusB(AminusB)
     );
     // Do not forget to wire up resets!!
+    assign an = anode;
     
 endmodule

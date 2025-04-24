@@ -5,16 +5,20 @@ module math_block(
     output [3:0] AminusB
 );
 
-    ones_compliment adder(
-        .A(A),
-        .B(B),
-        .Y(ApluxB)
-    );
+//    ones_compliment adder(
+//        .A(A),
+//        .B(B),
+//        .Y(AplusB)
+//    );
     
-    ones_compliment subtract(
-        .A(A),
-        .B(~B),
-        .Y(AminusB)
-    );
+//    ones_compliment subtract(
+//        .A(A),
+//        .B(~B),
+//        .Y(AminusB)
+//    );
+
+assign AplusB = A + B;
+
+assign AminusB = A + (~B) + 4'b0001;
 
 endmodule

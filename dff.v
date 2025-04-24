@@ -9,9 +9,9 @@ module dff(
 
     assign NotQ = ~Q;
 
-    initial begin
-        Q <= Default;
-    end
+//    initial begin
+//        Q <= Default;
+//    end
 
     always @(posedge clk, posedge reset) begin
         if (reset)
